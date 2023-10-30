@@ -1,0 +1,69 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:socer_project/screens/view_model/movie_cubit/movie_cubit.dart';
+
+import '../../../../generated/l10n.dart';
+import '../../../view_model/movie_cubit/movie_state.dart';
+
+class DetailsTabs extends StatelessWidget {
+  const DetailsTabs({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MovieCubit, MovieState>(
+      builder: (context, state) {
+        var cubit = MovieCubit.get(context);
+        List<String> detailsTaps = [
+          S.of(context).detailsTab1,
+          S.of(context).detailsTab2,
+          S.of(context).detailsTab3,
+        ];
+        return SizedBox(
+          height: 40.h,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 30.0.w,
+            ),
+            child: ListView.separated(
+              itemCount: detailsTaps.length,
+              separatorBuilder: (context, index) => SizedBox(
+                width: 10.w,
+              ),
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) => InkWell(
+                onTap: () {
+                  cubit.changeIndex(index);
+                },
+                child: Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        detailsTaps[index],
+                        style: TextStyle(
+                          color: cubit.dark ? Colors.white : Colors.black,
+                          height: 2.h,
+                        ),
+                      ),
+                    ),
+                    cubit.index == index
+                        ? Container(
+                            width: 95.w,
+                            height: 4.h,
+                            color: Colors.blueGrey,
+                          )
+                        : SizedBox(
+                            width: 95.w,
+                            height: 4.h,
+                          ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
