@@ -17,9 +17,16 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screens = {
+      0: const NowPlayingScreen(),
+      1: const UpComingScreen(),
+      2: const TopRatedScreen(),
+    };
+
     return BlocBuilder<MovieCubit, MovieState>(
       builder: (context, state) {
         var cubit = MovieCubit.get(context);
+        final selectedScreen = screens[cubit.index] ?? const PopularScreen();
         return Directionality(
           textDirection: cubit.currentLanguage == 'ar'
               ? TextDirection.rtl

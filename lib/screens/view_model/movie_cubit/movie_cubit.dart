@@ -35,12 +35,12 @@ class MovieCubit extends Cubit<MovieState> {
   final items = <Widget>[
     Icon(
       Icons.movie_sharp,
-      size: 30.sp,
+      size: 30,
       color: Colors.white,
     ),
     Icon(
       Icons.search_rounded,
-      size: 30.sp,
+      size: 30,
       color: Colors.white,
     ),
     // Icon(
@@ -257,7 +257,9 @@ class MovieCubit extends Cubit<MovieState> {
     emit(GetCastLoadingState());
     DioHelper.getData(
         url: 'movie/$id/${EndPoints.credits}',
-        query: {'language': 'en-US', 'page': 1}).then((value) {
+        query: {'language': 'en-US',
+          'page': 1}).then((value)
+    {
       castModel = CastModel.fromJson(value.data);
       emit(GetCastSuccessState());
     }).catchError((error) {

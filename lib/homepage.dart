@@ -26,7 +26,7 @@ class HomeNavPage extends StatelessWidget {
               color: cubit.dark?CustomColors.primaryButton:Colors.grey.shade400,
               items: cubit.items,
               index: cubit.currentIndex,
-              height: 50.h,
+              height: 60.h,
               onTap: (currentIndex) => cubit.changeCurrentIndex(
                 currentIndex,
               ),
